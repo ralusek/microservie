@@ -1,12 +1,5 @@
 lib/
 
-platforms/android/assets
-platforms/android/src
-platforms/ios/assets
-platforms/ios/src
-platforms/web/assets
-platforms/web/src
-
 # Logs
 logs
 *.log
