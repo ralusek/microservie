@@ -16,10 +16,10 @@
     "/lib"
   ],
   "scripts": {
-    "build": "npx parcel build ./src/index.ts --out-dir ./lib",
+    "build": "npx ttsc",
     "start": "npm run dev:start",
     "dev:start": "NODE_PATH=./src npx ts-node-dev ./src/index",
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test": "npx ttsc && mocha -r ts-node/register tests/**/*.test.ts",
     "prettify": "npx prettier --write '**/*.ts'"
   },
   "husky": {
@@ -51,6 +51,8 @@
     "tslint": "5.20.1",
     "tslint-config-prettier": "1.18.0",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "3.8.3"
+    "ttypescript": "^1.5.10",
+    "typescript": "3.8.3",
+    "typescript-transform-paths": "^1.1.14"
   }
 }

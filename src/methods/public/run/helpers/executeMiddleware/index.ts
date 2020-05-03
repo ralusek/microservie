@@ -1,11 +1,11 @@
 import bluebird from 'bluebird';
 
 // Types
-import { MicroServieMiddleware } from '~/types';
+import { MicroServieMiddleware } from '@/types';
 
 // Utils
-import isFunction from '~/utils/isFunction';
-import isMicroservie from '~/utils/isMicroservie';
+import isFunction from '@/utils/isFunction';
+import isMicroservie from '@/utils/isMicroservie';
 
 // Branching
 import or from '../branchingMiddleware/or';
