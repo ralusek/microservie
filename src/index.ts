@@ -1,9 +1,9 @@
 import Promise from 'bluebird';
 
 // Types
-import { MicroServieMiddleware, Microservie, MicroservieConfig } from '~/types';
+import { MicroServieMiddleware, Microservie, MicroservieConfig } from '@/types';
 // Methods
-import run from '~/methods/public/run';
+import run from '@/methods/public/run';
 
 export default (
   config: MicroservieConfig,
