@@ -19,7 +19,7 @@
     "build": "npx ttsc",
     "start": "npm run dev:start",
     "dev:start": "NODE_PATH=./src npx ts-node-dev ./src/index",
-    "test": "mocha -r ts-node/register tests/**/*.test.ts",
+    "test": "npm run build && mocha -r ts-node/register tests/**/*.test.ts",
     "prettify": "npx prettier --write '**/*.ts'"
   },
   "husky": {

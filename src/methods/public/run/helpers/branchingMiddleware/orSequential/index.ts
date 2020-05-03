@@ -1,5 +1,5 @@
 // Types
-import { MicroServieMiddleware } from '~/types';
+import { MicroServieMiddleware } from '@/types';
 
 // Helpers
 import executeMiddleware from '../../executeMiddleware';

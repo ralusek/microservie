@@ -62,36 +62,36 @@ export type MicroservieBranchingMiddleware =
        * Will resolve as soon as ONE middleware resolves.
        */
       $or: MicroServieMiddleware[];
-      $and: never;
-      $orSequential: never;
-      $andSequential: never;
+      $and?: never;
+      $orSequential?: never;
+      $andSequential?: never;
     }
   | {
-      $or: never;
+      $or?: never;
       /**
        * The provided middleware will be executed simultaneously.
        * Will error if ANY middleware error.
        * Will not resolve until ALL middleware resolves.
        */
       $and: MicroServieMiddleware[];
-      $orSequential: never;
-      $andSequential: never;
+      $orSequential?: never;
+      $andSequential?: never;
     }
   | {
-      $or: never;
-      $and: never;
+      $or?: never;
+      $and?: never;
       /**
        * The provided middleware will be executed sequentially.
        * Will only error if ALL middleware error.
        * Will resolve as soon as ONE middleware resolves.
        */
       $orSequential: MicroServieMiddleware[];
-      $andSequential: never;
+      $andSequential?: never;
     }
   | {
-      $or: never;
-      $and: never;
-      $orSequential: never;
+      $or?: never;
+      $and?: never;
+      $orSequential?: never;
       /**
        * The provided middleware will be executed sequentially.
        * Will error if ANY middleware error.

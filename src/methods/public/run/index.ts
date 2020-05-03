@@ -1,11 +1,11 @@
 // Types
-import { MicroServieMiddleware, MicroservieConfig, MicroservieContext } from '~/types';
+import { MicroServieMiddleware, MicroservieConfig, MicroservieContext } from '@/types';
 
 // Helpers
 import executeMiddleware from './helpers/executeMiddleware';
 
 // Utils
-import isFunction from '~/utils/isFunction';
+import isFunction from '@/utils/isFunction';
 
 const run = async (
   config: MicroservieConfig,
