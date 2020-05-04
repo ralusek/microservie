@@ -1,6 +1,6 @@
 {
   "name": "microservie",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Microservice interface and middleware.",
   "keywords": [
     "middleware",
