@@ -29,7 +29,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "bluebird": "3.x"
+    "indigobird": "^0.0.1"
   },
   "devDependencies": {
     "@types/bluebird": "3.5.27",
@@ -41,6 +41,7 @@
     "bluebird": "3.7.2",
     "chai": "4.2.0",
     "husky": "4.2.5",
+    "indigobird": "0.0.1",
     "mocha": "7.1.2",
     "prettier": "2.0.5",
     "pretty-quick": "2.0.1",
