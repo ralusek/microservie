@@ -6,11 +6,11 @@ export type MicroservieConfig = {
   name?: string;
 };
 
-export type Microservie = {
+export type Microservie<InitialContext extends object> = {
   /**
    *
    */
-  run: (context: any) => PromiseLike<any>;
+  run: (context: InitialContext) => PromiseLike<MicroservieContext<InitialContext>>;
 
   /**
    * Indicates whether or not is a microservie.
@@ -20,7 +20,7 @@ export type Microservie = {
   readonly IS_MICROSERVIE: true;
 };
 
-export type MicroservieContext = {
+export type MicroservieContext<InitialContext extends object> = {
   /**
    * Metrics, keyed by microservie name, if provided.
    */
@@ -29,11 +29,11 @@ export type MicroservieContext = {
       /**
        * When the microservie began execution.
        */
-      startedAt: string;
+      startedAt: number;
       /**
        * When the microservie completed execution.
        */
-      finishedAt: string;
+      finishedAt: number;
     };
   };
   /**
@@ -44,24 +44,22 @@ export type MicroservieContext = {
     [key in string]: any;
   };
   results: any[];
-};
+} & InitialContext;
 
-export type MicroservieMiddlewareFn = (context: any) => void;
-
-type MicroservieBranchingMiddlewareMap = {};
+export type MicroservieMiddlewareFn<IC extends object> = (context: IC) => void;
 
 /**
  * References map type, but only allows for one property to be present at a time.
  * This is what the actual interface is meant to be.
  */
-export type MicroservieBranchingMiddleware =
+export type MicroservieBranchingMiddleware<IC extends object> =
   | {
       /**
        * The provided middleware will be executed simultaneously.
        * Will only error if ALL middlware error.
        * Will resolve as soon as ONE middleware resolves.
        */
-      $or: MicroServieMiddleware[];
+      $or: MicroServieMiddleware<IC>[];
       $and?: never;
       $orSequential?: never;
       $andSequential?: never;
@@ -73,7 +71,7 @@ export type MicroservieBranchingMiddleware =
        * Will error if ANY middleware error.
        * Will not resolve until ALL middleware resolves.
        */
-      $and: MicroServieMiddleware[];
+      $and: MicroServieMiddleware<IC>[];
       $orSequential?: never;
       $andSequential?: never;
     }
@@ -85,7 +83,7 @@ export type MicroservieBranchingMiddleware =
        * Will only error if ALL middleware error.
        * Will resolve as soon as ONE middleware resolves.
        */
-      $orSequential: MicroServieMiddleware[];
+      $orSequential: MicroServieMiddleware<IC>[];
       $andSequential?: never;
     }
   | {
@@ -97,7 +95,10 @@ export type MicroservieBranchingMiddleware =
        * Will error if ANY middleware error.
        * Will not resolve until ALL middleware resolves.
        */
-      $andSequential: MicroServieMiddleware[];
+      $andSequential: MicroServieMiddleware<IC>[];
     };
 
-export type MicroServieMiddleware = MicroservieMiddlewareFn | MicroservieBranchingMiddleware | Microservie;
+export type MicroServieMiddleware<IC extends object> =
+  | MicroservieMiddlewareFn<IC>
+  | MicroservieBranchingMiddleware<IC>
+  | Microservie<IC>;

@@ -7,32 +7,34 @@ import executeMiddleware from './helpers/executeMiddleware';
 // Utils
 import isFunction from '@/utils/isFunction';
 
-const run = async (
+async function run<IC extends object>(
   config: MicroservieConfig,
-  context: any = {},
-  middleware: (() => MicroServieMiddleware[]) | MicroServieMiddleware[]
-): Promise<MicroservieContext> => {
+  context: IC,
+  middleware: (() => MicroServieMiddleware<IC>[]) | MicroServieMiddleware<IC>[]
+): Promise<MicroservieContext<IC>> {
   // We get the middleware if it is behind a getter function.
   // This is allowed due to the getter function being an option
   // for the user avoiding circular dependencies when setting up
   // the necessary middleware in their application.
   const retrievedMiddleware = isFunction(middleware) ? middleware() : middleware;
 
-  context.metrics = context.metrics || {};
-  context.namedResults = context.namedResults || {};
-  context.results = context.results = [];
+  const newContext: MicroservieContext<IC> = context as MicroservieContext<IC>;
+
+  newContext.metrics = newContext.metrics || {};
+  newContext.namedResults = newContext.namedResults || {};
+  newContext.results = newContext.results = [];
   if (config.name)
-    context.metrics[config.name] = {
+    newContext.metrics[config.name] = {
       startedAt: Date.now(),
-    };
+    } as MicroservieContext<IC>['metrics'][keyof MicroservieContext<IC>['metrics']];
 
   const result = await executeMiddleware(context, retrievedMiddleware);
   if (config.name) {
-    context.metrics[config.name].finishedAt = Date.now();
-    context.namedResults[config.name] = result;
+    newContext.metrics[config.name].finishedAt = Date.now();
+    newContext.namedResults[config.name] = result;
   }
 
-  return context;
-};
+  return newContext;
+}
 
 export default run;

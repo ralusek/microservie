@@ -1,12 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
 
-// Types
-import { Microservie } from '../lib/types';
-
 import microservie from '../lib/index';
 
-let instance: Microservie;
+let instance;
 
 describe('LazyInstantiation', () => {
   it('should accept a getter function as middleware.', () => {
@@ -31,7 +28,7 @@ describe('LazyInstantiation', () => {
 
   it('should call the getter only after running.', () => {
     let hasCalled = false;
-    instance = microservie(
+    const instance = microservie<{ hi: string }>(
       {
         name: 'Lazy',
       },
@@ -42,7 +39,9 @@ describe('LazyInstantiation', () => {
     );
     expect(hasCalled).to.be.false;
 
-    instance.run({});
+    instance.run({
+      hi: 'hey',
+    });
 
     expect(hasCalled).to.be.true;
   });

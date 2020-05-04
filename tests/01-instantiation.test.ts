@@ -1,12 +1,9 @@
 import 'mocha';
 import { expect } from 'chai';
 
-// Types
-import { Microservie } from '../lib/types';
-
 import microservie from '../lib/index';
 
-let instance: Microservie;
+let instance;
 
 describe('Instantiation', () => {
   it('should instantiate a new instance.', () => {

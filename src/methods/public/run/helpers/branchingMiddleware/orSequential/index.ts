@@ -6,6 +6,9 @@ import { MicroServieMiddleware } from '@/types';
 // Helpers
 import executeMiddleware from '../../executeMiddleware';
 
-export default (context: any, middlewares: MicroServieMiddleware[]): PromiseLike<any> => {
+export default function orSequential<IC extends object>(
+  context: IC,
+  middlewares: MicroServieMiddleware<IC>[]
+): PromiseLike<any> {
   return any(middlewares, (middleware) => executeMiddleware(context, middleware), { concurrency: 1 });
-};
+}

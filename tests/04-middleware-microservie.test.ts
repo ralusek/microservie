@@ -6,7 +6,7 @@ import { Microservie } from '../lib/types';
 
 import microservie from '../lib/index';
 
-let instances: { [k in string]: Microservie } = {};
+let instances: { [k in string]: Microservie<any> } = {};
 
 describe('Middleware: Microservies', () => {
   it('should accept Microservies as middleware', () => {
