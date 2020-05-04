@@ -29,19 +29,17 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "indigobird": "^0.0.1"
+    "indigobird": "^0.0.2"
   },
   "devDependencies": {
-    "@types/bluebird": "3.5.27",
     "@types/chai": "^4.2.11",
     "@types/mocha": "^7.0.2",
     "@types/node": "12.7.5",
     "@types/uuid": "3.4.5",
     "@types/validator": "10.11.3",
-    "bluebird": "3.7.2",
     "chai": "4.2.0",
     "husky": "4.2.5",
-    "indigobird": "0.0.1",
+    "indigobird": "0.0.2",
     "mocha": "7.1.2",
     "prettier": "2.0.5",
     "pretty-quick": "2.0.1",

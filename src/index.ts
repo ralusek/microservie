@@ -1,5 +1,3 @@
-import Promise from 'bluebird';
-
 // Types
 import { MicroServieMiddleware, Microservie, MicroservieConfig } from '@/types';
 // Methods

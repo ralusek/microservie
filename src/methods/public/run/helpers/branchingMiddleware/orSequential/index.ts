@@ -7,9 +7,5 @@ import { MicroServieMiddleware } from '@/types';
 import executeMiddleware from '../../executeMiddleware';
 
 export default (context: any, middlewares: MicroServieMiddleware[]): PromiseLike<any> => {
-  return any(
-    middlewares,
-    (middleware) => executeMiddleware(context, middleware),
-    { concurrency: 1 }
-  );
+  return any(middlewares, (middleware) => executeMiddleware(context, middleware), { concurrency: 1 });
 };
