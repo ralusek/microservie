@@ -7,18 +7,18 @@ import executeMiddleware from './helpers/executeMiddleware';
 // Utils
 import isFunction from '@/utils/isFunction';
 
-async function run<IC extends object, MC extends IC>(
+async function run<IC extends object>(
   config: MicroservieConfig,
   context: IC,
-  middleware: (() => MicroServieMiddleware<IC, MC>[]) | MicroServieMiddleware<IC, MC>[]
-): Promise<MicroservieContext<IC & MC>> {
+  middleware: (() => MicroServieMiddleware<IC>[]) | MicroServieMiddleware<IC>[]
+): Promise<MicroservieContext<IC>> {
   // We get the middleware if it is behind a getter function.
   // This is allowed due to the getter function being an option
   // for the user avoiding circular dependencies when setting up
   // the necessary middleware in their application.
   const retrievedMiddleware = isFunction(middleware) ? middleware() : middleware;
 
-  const newContext: MicroservieContext<IC & MC> = context as MicroservieContext<IC & MC>;
+  const newContext: MicroservieContext<IC> = context as MicroservieContext<IC>;
 
   newContext.metrics = newContext.metrics || {};
   newContext.namedResults = newContext.namedResults || {};
@@ -26,7 +26,7 @@ async function run<IC extends object, MC extends IC>(
   if (config.name)
     newContext.metrics[config.name] = {
       startedAt: Date.now(),
-    } as MicroservieContext<IC & MC>['metrics'][keyof MicroservieContext<IC & MC>['metrics']];
+    } as MicroservieContext<IC>['metrics'][keyof MicroservieContext<IC>['metrics']];
 
   const result = await executeMiddleware(context, retrievedMiddleware);
   if (config.name) {

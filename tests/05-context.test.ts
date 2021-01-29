@@ -12,7 +12,7 @@ describe('Context', () => {
     };
     let finished = false;
 
-    const instance = microservie<typeof testObj, typeof testObj>(
+    const instance = microservie<typeof testObj>(
       {
         name: 'A',
       },
