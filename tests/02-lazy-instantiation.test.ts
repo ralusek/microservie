@@ -28,7 +28,7 @@ describe('LazyInstantiation', () => {
 
   it('should call the getter only after running.', () => {
     let hasCalled = false;
-    const instance = microservie<{ hi: string }>(
+    const instance = microservie<{ hi: string }, { hi: string }>(
       {
         name: 'Lazy',
       },

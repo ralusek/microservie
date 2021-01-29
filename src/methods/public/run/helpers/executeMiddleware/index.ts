@@ -13,16 +13,16 @@ import orSequential from '../branchingMiddleware/orSequential';
 import and from '../branchingMiddleware/and';
 import andSequential from '../branchingMiddleware/andSequential';
 
-async function executeMiddleware<IC extends object>(
+async function executeMiddleware<IC extends object, MC extends IC>(
   context: IC,
-  middlewares: MicroServieMiddleware<IC> | MicroServieMiddleware<IC>[]
+  middlewares: MicroServieMiddleware<IC, MC> | MicroServieMiddleware<IC, MC>[]
 ) {
   const asArray = Array.isArray(middlewares) ? middlewares : [middlewares];
   return indigobird.all(
     asArray,
     (middleware) => {
       if (isFunction(middleware)) return middleware(context);
-      if (isMicroservie<IC>(middleware)) return middleware.run(context);
+      if (isMicroservie<IC, MC>(middleware)) return middleware.run(context);
       if (middleware.$or) return or(context, middleware.$or);
       if (middleware.$orSequential) return orSequential(context, middleware.$orSequential);
       if (middleware.$and) return and(context, middleware.$and);

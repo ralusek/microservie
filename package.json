@@ -29,7 +29,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "indigobird": "^0.0.2"
+    "indigobird": "^0.3.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",
@@ -39,7 +39,6 @@
     "@types/validator": "10.11.3",
     "chai": "4.2.0",
     "husky": "4.2.5",
-    "indigobird": "0.0.2",
     "mocha": "7.1.2",
     "prettier": "2.0.5",
     "pretty-quick": "2.0.1",
