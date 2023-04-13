@@ -1,14 +1,14 @@
 import { all } from 'indigobird';
 
 // Types
-import { MicroServieMiddleware } from '@/types';
+import { MicroservieContext, MicroservieMiddleware } from '@/types';
 
 // Helpers
 import executeMiddleware from '../../executeMiddleware';
 
-export default function andSequential<IC extends object>(
-  context: IC,
-  middlewares: MicroServieMiddleware<IC>[]
+export default function andSequential(
+  context: MicroservieContext,
+  middlewares: MicroservieMiddleware[]
 ): PromiseLike<any> {
   return all(middlewares, (middleware) => executeMiddleware(context, middleware), { concurrency: 1 });
 }

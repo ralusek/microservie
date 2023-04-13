@@ -1,5 +1,5 @@
-import { Microservie } from '@/types';
+import { Microservie, MicroservieContext } from '@/types';
 
-export default function isMicroservie<IC extends object>(test: any): test is Microservie<IC> {
+export default function isMicroservie(test: any): test is Microservie<MicroservieContext> {
   return test && test.IS_MICROSERVIE === true;
 }

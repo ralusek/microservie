@@ -1,13 +1,10 @@
-import { MicroServieMiddleware, Microservie } from '@/types';
+import { MicroservieMiddleware, Microservie, MicroservieContext } from '@/types';
 import microservie from '@/index';
 
-function catchWrap<IC extends object>(
-  middleware: MicroServieMiddleware<IC>,
-  errorHandler: (err: any) => any
-): MicroServieMiddleware<IC> {
+function catchWrap(middleware: MicroservieMiddleware, errorHandler: (err: any) => any): MicroservieMiddleware {
   const instance = microservie({}, [middleware]);
 
-  return (context: IC) => {
+  return (context) => {
     return instance.run(context).catch(errorHandler);
   };
 }
